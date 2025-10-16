@@ -42,6 +42,8 @@ Create a file named .env and add your keys in the following format:
 GEMINI_API_KEY="your-new-google-api-key-here"
 SEARCH_API_KEY="your-new-google-api-key-here"
 SEARCH_ENGINE_ID="your-search-engine-id-here"
+
+
 💻 Usage Guide
 There are two ways to run this application. The web interface is the recommended method.
 Option 1: Web Application (Recommended)
@@ -52,6 +54,8 @@ Enter a text fragment and click the "Reconstruct Artifact" button.
 Option 2: Command-Line Tool
 Ensure your virtual environment is activated.
 Run the main.py script from your terminal, passing the fragmented text as an argument in quotes.
+
+
 Example Command:
 python main.py "...and that's why, IMHO, the new update completely broke the forums. YMMV."
 The full reconstruction report will be printed directly to your console.
