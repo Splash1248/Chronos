@@ -45,6 +45,7 @@ SEARCH_ENGINE_ID="your-search-engine-id-here"
 
 
 💻 Usage Guide
+
 There are two ways to run this application. The web interface is the recommended method.
 
 Option 1: Web Application (Recommended)
