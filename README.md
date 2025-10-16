@@ -26,12 +26,12 @@ git clone <https://github.com/Splash1248/Chronos.git>
 cd project-chronos
 2. Set Up the Python Environment (for the command-line tool)
 It is recommended to use a Python virtual environment to manage dependencies.
-# Create a virtual environment
+ Create a virtual environment
 python -m venv env
-# Activate the environment
-# On Windows (CMD/PowerShell):
+ Activate the environment
+ On Windows (CMD/PowerShell):
 .\env\Scripts\activate
-# On macOS/Linux:
+ On macOS/Linux:
 source env/bin/activate
 3. Install Dependencies
 Install all the necessary Python packages using the requirements.txt file.
