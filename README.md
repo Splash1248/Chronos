@@ -46,11 +46,13 @@ SEARCH_ENGINE_ID="your-search-engine-id-here"
 
 💻 Usage Guide
 There are two ways to run this application. The web interface is the recommended method.
+
 Option 1: Web Application (Recommended)
 Navigate to the project folder on your computer.
 Find the index.html file and open it with your web browser (e.g., Google Chrome, Firefox).
 Paste your API keys into the credential fields at the top of the page.
 Enter a text fragment and click the "Reconstruct Artifact" button.
+
 Option 2: Command-Line Tool
 Ensure your virtual environment is activated.
 Run the main.py script from your terminal, passing the fragmented text as an argument in quotes.
