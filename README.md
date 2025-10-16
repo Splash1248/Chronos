@@ -1,8 +1,8 @@
 Project Chronos: The AI Archeologist
 
 Ganesh Krishna Rao 
-Krishna Kaushal Kauluri
 SE24UCSE254 
+Krishna Kaushal Kauluri
 SE24UCSE170
 
 📖 Project Description
@@ -39,8 +39,11 @@ pip install -r requirements.txt
 4. Set Up API Keys
 This project requires three API credentials from Google. You must create a .env file in the root of the project to store them.
 Create a file named .env and add your keys in the following format:
+
 GEMINI_API_KEY="your-new-google-api-key-here"
+
 SEARCH_API_KEY="your-new-google-api-key-here"
+
 SEARCH_ENGINE_ID="your-search-engine-id-here"
 
 
