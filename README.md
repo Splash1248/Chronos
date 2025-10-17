@@ -1,8 +1,8 @@
 Project Chronos: The AI Archeologist
 
 Ganesh Krishna Rao 
-Krishna Kaushal Kauluri
 SE24UCSE254 
+Krishna Kaushal Kauluri
 SE24UCSE170
 
 📖 Project Description
@@ -26,12 +26,12 @@ git clone <https://github.com/Splash1248/Chronos.git>
 cd project-chronos
 2. Set Up the Python Environment (for the command-line tool)
 It is recommended to use a Python virtual environment to manage dependencies.
-# Create a virtual environment
+ Create a virtual environment
 python -m venv env
-# Activate the environment
-# On Windows (CMD/PowerShell):
+ Activate the environment
+ On Windows (CMD/PowerShell):
 .\env\Scripts\activate
-# On macOS/Linux:
+ On macOS/Linux:
 source env/bin/activate
 3. Install Dependencies
 Install all the necessary Python packages using the requirements.txt file.
@@ -39,19 +39,29 @@ pip install -r requirements.txt
 4. Set Up API Keys
 This project requires three API credentials from Google. You must create a .env file in the root of the project to store them.
 Create a file named .env and add your keys in the following format:
+
 GEMINI_API_KEY="your-new-google-api-key-here"
+
 SEARCH_API_KEY="your-new-google-api-key-here"
+
 SEARCH_ENGINE_ID="your-search-engine-id-here"
+
+
 💻 Usage Guide
+
 There are two ways to run this application. The web interface is the recommended method.
+
 Option 1: Web Application (Recommended)
 Navigate to the project folder on your computer.
 Find the index.html file and open it with your web browser (e.g., Google Chrome, Firefox).
 Paste your API keys into the credential fields at the top of the page.
 Enter a text fragment and click the "Reconstruct Artifact" button.
+
 Option 2: Command-Line Tool
 Ensure your virtual environment is activated.
 Run the main.py script from your terminal, passing the fragmented text as an argument in quotes.
+
+
 Example Command:
 python main.py "...and that's why, IMHO, the new update completely broke the forums. YMMV."
 The full reconstruction report will be printed directly to your console.
