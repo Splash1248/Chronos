@@ -26,7 +26,6 @@
             position: relative; 
         }
 
-
         #starfield-canvas {
             position: fixed;
             top: 0;
@@ -77,33 +76,34 @@
         .report-content strong { color: #a5b4fc; }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 text-slate-300">
+<body class="min-h-screen text-slate-300">
 
     <canvas id="starfield-canvas"></canvas>
-
-    <div class="w-full max-w-4xl mx-auto space-y-6 relative overflow-y-auto max-h-screen pb-8 content-container">
-        <div class="text-center" style="animation: fadeInUp 0.5s ease-out forwards;">
-            <h1 class="text-4xl md:text-5xl font-bold font-tech text-indigo-400 tracking-wider">
-                Project Chronos
-            </h1>
-            <p class="text-slate-400 mt-2">The AI Digital Archeologist</p>
-        </div>
-
-        <div class="glass-card p-6 shadow-2xl anim-delay-1">
-            <div class="space-y-4">
-                <textarea id="fragment-input" class="w-full h-24 bg-gray-900/50 border border-gray-700 rounded-md p-3 text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-300 resize-none" placeholder="Enter a fragmented digital artifact... e.g., 'smh at the top 8 drama. ppl need to chill.'"></textarea>
-                <button id="reconstruct-button" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out flex items-center justify-center space-x-2 shadow-lg hover:shadow-indigo-500/30 reconstruct-button-pulse">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path></svg>
-                    <span>Reconstruct Artifact</span>
-                </button>
+    
+    <div class="w-full h-screen overflow-y-auto content-container">
+        <div class="w-full max-w-4xl mx-auto space-y-6 relative p-4 sm:p-8 flex flex-col justify-center min-h-full">
+            <div class="text-center" style="animation: fadeInUp 0.5s ease-out forwards;">
+                <h1 class="text-4xl md:text-5xl font-bold font-tech text-indigo-400 tracking-wider">
+                    Project Chronos
+                </h1>
+                <p class="text-slate-400 mt-2">The AI Digital Archeologist</p>
             </div>
-        </div>
-
-
-        <div id="report-output" class="hidden">
-            <div class="glass-card p-6 shadow-2xl anim-delay-3">
-                <h2 class="text-2xl font-bold font-tech text-indigo-400 mb-4 tracking-wider">Reconstruction Report</h2>
-                <div id="report-container" class="space-y-6">
+    
+            <div class="glass-card p-6 shadow-2xl anim-delay-1">
+                <div class="space-y-4">
+                    <textarea id="fragment-input" class="w-full h-24 bg-gray-900/50 border border-gray-700 rounded-md p-3 text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-300 resize-none" placeholder="Enter a fragmented digital artifact... e.g., 'smh at the top 8 drama. ppl need to chill.'"></textarea>
+                    <button id="reconstruct-button" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out flex items-center justify-center space-x-2 shadow-lg hover:shadow-indigo-500/30 reconstruct-button-pulse">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path></svg>
+                        <span>Reconstruct Artifact</span>
+                    </button>
+                </div>
+            </div>
+    
+            <div id="report-output" class="hidden">
+                <div class="glass-card p-6 shadow-2xl anim-delay-3">
+                    <h2 class="text-2xl font-bold font-tech text-indigo-400 mb-4 tracking-wider">Reconstruction Report</h2>
+                    <div id="report-container" class="space-y-6">
+                    </div>
                 </div>
             </div>
         </div>
@@ -160,7 +160,6 @@
             setCanvasSize();
             animate();
         });
-
 
         const fragmentInput = document.getElementById('fragment-input');
         const reconstructButton = document.getElementById('reconstruct-button');
