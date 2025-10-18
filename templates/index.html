@@ -7,23 +7,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.3), 0 0 5px rgba(168, 85, 247, 0.2) inset; }
-            50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.5), 0 0 10px rgba(168, 85, 247, 0.3) inset; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Share Tech Mono', monospace;
             background-color: #030712;
+            color: #00E5FF; /* Bright Cyan */
             overflow: hidden;
-            position: relative; 
         }
 
         #starfield-canvas {
@@ -34,75 +29,57 @@
             height: 100%;
             z-index: -10;
         }
-
-        .font-tech {
-            font-family: 'Share Tech Mono', monospace;
+        
+        .hud-container {
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.2) inset, 0 0 15px rgba(0, 229, 255, 0.2);
+            background: rgba(10, 25, 47, 0.15);
+            backdrop-filter: blur(5px);
+            clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+            animation: fadeIn 1s ease-out;
         }
 
-        .glass-card {
-            background: rgba(17, 24, 39, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(55, 65, 81, 0.5);
-            position: relative;
-            overflow: hidden;
-            border-radius: 0.75rem;
-            animation: fadeInUp 0.5s ease-out forwards;
+        .hud-card {
+            background: transparent;
+            animation: fadeIn 1s ease-out 0.5s forwards;
             opacity: 0;
         }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            z-index: -1;
-            margin: -1px;
-            border-radius: inherit;
-            background: linear-gradient(145deg, rgba(79, 70, 229, 0.2), rgba(55, 65, 81, 0.1), rgba(168, 85, 247, 0.15));
-        }
-
-        .anim-delay-1 { animation-delay: 0.1s; }
-        .anim-delay-2 { animation-delay: 0.2s; }
-        .anim-delay-3 { animation-delay: 0.3s; }
         
-        .reconstruct-button-pulse {
-            animation: pulseGlow 3s infinite;
-        }
-        
-        .content-container::-webkit-scrollbar { width: 8px; }
-        .content-container::-webkit-scrollbar-track { background: #1f2937; }
-        .content-container::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
-        .content-container::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+        .content-container::-webkit-scrollbar { width: 6px; }
+        .content-container::-webkit-scrollbar-track { background: transparent; }
+        .content-container::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.3); }
+        .content-container::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.5); }
 
-        .report-content strong { color: #a5b4fc; }
+        .report-content strong { color: #80DEEA; } /* Lighter Cyan */
     </style>
 </head>
-<body class="min-h-screen text-slate-300">
+<body class="min-h-screen">
 
     <canvas id="starfield-canvas"></canvas>
     
-    <div class="w-full h-screen overflow-y-auto content-container">
-        <div class="w-full max-w-4xl mx-auto space-y-6 relative p-4 sm:p-8 flex flex-col justify-center min-h-full">
-            <div class="text-center" style="animation: fadeInUp 0.5s ease-out forwards;">
-                <h1 class="text-4xl md:text-5xl font-bold font-tech text-indigo-400 tracking-wider">
+    <div class="w-full h-screen overflow-y-auto content-container p-8 sm:p-16">
+        <div class="w-full max-w-3xl mx-auto space-y-6 hud-container p-6 sm:p-8">
+            <div class="text-center" style="animation: fadeIn 1s ease-out;">
+                <h1 class="text-3xl md:text-4xl font-bold tracking-widest uppercase">
                     Project Chronos
                 </h1>
-                <p class="text-slate-400 mt-2">The AI Digital Archeologist</p>
+                <p class="text-cyan-300/70 mt-1 text-sm">// AI DIGITAL ARCHEOLOGY INTERFACE //</p>
             </div>
     
-            <div class="glass-card p-6 shadow-2xl anim-delay-1">
+            <div class="hud-card">
                 <div class="space-y-4">
-                    <textarea id="fragment-input" class="w-full h-24 bg-gray-900/50 border border-gray-700 rounded-md p-3 text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-300 resize-none" placeholder="Enter a fragmented digital artifact... e.g., 'smh at the top 8 drama. ppl need to chill.'"></textarea>
-                    <button id="reconstruct-button" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out flex items-center justify-center space-x-2 shadow-lg hover:shadow-indigo-500/30 reconstruct-button-pulse">
+                    <textarea id="fragment-input" class="w-full h-24 bg-black/30 border border-cyan-500/30 rounded-none p-3 placeholder-cyan-400/50 focus:ring-1 focus:ring-cyan-300 focus:border-cyan-400 outline-none transition-all duration-300 resize-none" placeholder="> Input digital artifact fragment..."></textarea>
+                    <button id="reconstruct-button" class="w-full bg-cyan-500/20 hover:bg-cyan-400/30 border border-cyan-400 text-cyan-300 font-bold py-3 px-4 transition-all duration-300 ease-in-out flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path></svg>
-                        <span>Reconstruct Artifact</span>
+                        <span>Execute Reconstruction</span>
                     </button>
                 </div>
             </div>
     
             <div id="report-output" class="hidden">
-                <div class="glass-card p-6 shadow-2xl anim-delay-3">
-                    <h2 class="text-2xl font-bold font-tech text-indigo-400 mb-4 tracking-wider">Reconstruction Report</h2>
-                    <div id="report-container" class="space-y-6">
+                <div class="hud-card p-4 border border-cyan-500/30 mt-6">
+                    <h2 class="text-2xl font-bold tracking-widest mb-4">// RECONSTRUCTION REPORT //</h2>
+                    <div id="report-container" class="space-y-6 text-cyan-300/90">
                     </div>
                 </div>
             </div>
@@ -113,49 +90,37 @@
         document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('starfield-canvas');
             const ctx = canvas.getContext('2d');
-
-            let stars = [];
-            let numStars = 200;
-
+            let stars = [], numStars = 250;
             function setCanvasSize() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 stars = [];
-                for (let i = 0; i < numStars; i++) {
-                    stars.push(createStar());
-                }
+                for (let i = 0; i < numStars; i++) stars.push(createStar());
             }
-
             function createStar() {
                 return {
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 1.5 + 0.5,
+                    radius: Math.random() * 1.2 + 0.5,
                     vx: Math.random() * 0.2 - 0.1,
                     vy: Math.random() * 0.2 - 0.1,
                     opacity: Math.random() * 0.5 + 0.2
                 };
             }
-
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
                 stars.forEach(star => {
                     star.x += star.vx;
                     star.y += star.vy;
-
                     if (star.x < 0 || star.x > canvas.width) star.vx = -star.vx;
                     if (star.y < 0 || star.y > canvas.height) star.vy = -star.vy;
-                    
                     ctx.beginPath();
                     ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(224, 231, 255, ${star.opacity})`;
+                    ctx.fillStyle = `rgba(0, 229, 255, ${star.opacity})`;
                     ctx.fill();
                 });
-
                 requestAnimationFrame(animate);
             }
-
             window.addEventListener('resize', setCanvasSize);
             setCanvasSize();
             animate();
@@ -169,7 +134,7 @@
         reconstructButton.addEventListener('click', async () => {
             const fragmentText = fragmentInput.value.trim();
             if (!fragmentText) {
-                displayError("Please provide a text fragment to reconstruct.");
+                displayError("AUTHENTICATION ERROR: No fragment provided for analysis.");
                 return;
             }
             showLoadingState();
@@ -180,53 +145,48 @@
                     body: JSON.stringify({ fragment: fragmentText })
                 });
                 const result = await response.json();
-                if (!response.ok) {
-                    throw new Error(result.error || 'An unknown server error occurred.');
-                }
+                if (!response.ok) throw new Error(result.error || 'Server uplink failed.');
                 displayReport(fragmentText, result.reconstructed_text, result.context_links);
             } catch (error) {
-                console.error('An error occurred:', error);
+                console.error('Uplink Error:', error);
                 displayError(error.message);
             }
         });
         
         function showLoadingState() {
             reportOutput.classList.remove('hidden');
-            const reportCard = reportOutput.querySelector('.glass-card');
+            const reportCard = reportOutput.querySelector('.hud-card');
             reportCard.style.opacity = '0';
-            reportCard.style.animation = 'none';
-            reportCard.offsetHeight;
-            reportCard.style.animation = ''; 
             reportContainer.innerHTML = `
-                <div class="flex flex-col items-center justify-center space-y-4 p-8">
-                    <div class="w-8 h-8 border-4 border-indigo-400 border-t-transparent rounded-full animate-spin"></div>
-                    <p class="text-slate-400">Communicating with server... Reconstructing digital past.</p>
+                <div class="flex items-center justify-center space-x-3 p-8">
+                    <div class="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+                    <p class="text-cyan-400/80">Analyzing fragment...</p>
                 </div>`;
+            setTimeout(() => { reportCard.style.opacity = '1'; }, 10);
         }
 
         function displayReport(original, reconstructed, links) {
             const formattedReconstruction = reconstructed
-                .replace(/^Explanation:/gm, '<strong>Explanation:</strong>')
+                .replace(/^Explanation:/gm, '<strong>// ANALYSIS //</strong>')
                 .replace(/\n/g, '<br>');
             reportContainer.innerHTML = `
                 <div>
-                    <h3 class="text-lg font-semibold text-slate-200 mb-2">[Original Fragment]</h3>
-                    <p class="bg-gray-900/50 p-3 rounded-md text-slate-400 italic">"${original}"</p>
+                    <h3 class="text-lg font-semibold mb-2">[Original Artifact]</h3>
+                    <p class="bg-black/30 p-3 text-cyan-400/70 italic">"${original}"</p>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold text-slate-200 mb-2">[AI-Reconstructed Text]</h3>
-                    <div class="bg-gray-900/50 p-3 rounded-md text-slate-300 report-content">${formattedReconstruction}</div>
+                    <h3 class="text-lg font-semibold mb-2">[Reconstructed Data]</h3>
+                    <div class="bg-black/30 p-3 text-cyan-300 report-content">${formattedReconstruction}</div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold text-slate-200 mb-2">[Contextual Sources]</h3>
+                    <h3 class="text-lg font-semibold mb-2">[External Databanks]</h3>
                     <ul class="space-y-2">
                         ${links && links.length > 0 ? links.map(link => `
                             <li>
-                                <a href="${link}" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-indigo-400 hover:text-indigo-300 break-all transition-colors duration-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
-                                    <span>${link}</span>
+                                <a href="${link}" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-cyan-400 hover:text-cyan-200 break-all transition-colors duration-300">
+                                    <span>> ${link}</span>
                                 </a>
-                            </li>`).join('') : '<p class="text-slate-500">No sources found.</p>'}
+                            </li>`).join('') : '<p class="text-cyan-500/70">> No relevant databanks found.</p>'}
                     </ul>
                 </div>`;
         }
@@ -234,9 +194,9 @@
         function displayError(message) {
             reportOutput.classList.remove('hidden');
             reportContainer.innerHTML = `
-                <div class="bg-red-900/30 border border-red-500/50 text-red-300 p-4 rounded-md">
-                    <h3 class="font-bold mb-2">An Error Occurred</h3>
-                    <p>${message}</p>
+                <div class="bg-red-900/50 border border-red-500/50 text-red-300 p-4">
+                    <h3 class="font-bold mb-2">// SYSTEM WARNING //</h3>
+                    <p>> ${message}</p>
                 </div>`;
         }
     </script>
