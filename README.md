@@ -86,6 +86,8 @@ Open your web browser and navigate to the following address:
 
 You can now use the application directly in your browser.
 
+Video demonstration: https://youtu.be/yKTIY8cEINU
+
 ## 📂 Project Structure
 
 The project is organized with a clear separation between the backend server, core logic, and frontend templates.
