@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import main as core_logic
+import core_logic
 import os
 from dotenv import load_dotenv
 
