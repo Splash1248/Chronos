@@ -17,7 +17,7 @@
         body {
             font-family: 'Share Tech Mono', monospace;
             background-color: #030712;
-            color: #00E5FF; /* Bright Cyan */
+            color: #00E5FF;
             overflow: hidden;
         }
 
@@ -50,7 +50,7 @@
         .content-container::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.3); }
         .content-container::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.5); }
 
-        .report-content strong { color: #80DEEA; } /* Lighter Cyan */
+        .report-content strong { color: #80DEEA; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -116,7 +116,11 @@
                 const centerX = canvas.width / 2;
                 const centerY = canvas.height / 2;
 
-                ctx.fillStyle = 'rgba(3, 7, 18, 0.2)';
+                let fadeAlpha = 0.2;
+                if (!hyperspaceActive && starSpeed > 0.5) {
+                    fadeAlpha = 0.95;
+                }
+                ctx.fillStyle = `rgba(3, 7, 18, ${fadeAlpha})`;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 if (hyperspaceActive && starSpeed < 25) {
@@ -147,7 +151,7 @@
 
                     const radius = Math.max(0.1, scale * 1.5);
                     
-                    if (starSpeed > 1) {
+                    if (hyperspaceActive) {
                          ctx.beginPath();
                          ctx.moveTo(psx, psy);
                          ctx.lineTo(sx, sy);
@@ -231,7 +235,7 @@
                             <li>
                                 <a href="${link}" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-cyan-400 hover:text-cyan-200 break-all transition-colors duration-300">
                                     <span>> ${link}</span>
-                                a>
+                                </a>
                             </li>`).join('') : '<p class="text-cyan-500/70">> No relevant databanks found.</p>'}
                     </ul>
                 </div>`;
@@ -248,4 +252,3 @@
     </script>
 </body>
 </html>
-
