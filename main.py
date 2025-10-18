@@ -1,6 +1,4 @@
 import os
-os.environ["GRPC_VERBOSITY"] = "ERROR"
-os.environ["GLOG_minloglevel"] = "2"
 import sys
 import requests
 import google.generativeai as genai
@@ -8,12 +6,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+os.environ["GRPC_VERBOSITY"] = "ERROR"
+os.environ["GLOG_minloglevel"] = "2"
+
+
 def reconstruct_text_with_gemini(api_key, fragment_text):
-    """Uses the Gemini API to reconstruct a fragmented piece of text."""
     try:
         genai.configure(api_key=api_key)
 
-        # Use your available model
         model = genai.GenerativeModel("gemini-2.5-flash")
 
         prompt = (
@@ -30,8 +30,9 @@ def reconstruct_text_with_gemini(api_key, fragment_text):
     except Exception as e:
         return f"An error occurred with the Gemini API: {e}"
 
+
+
 def search_for_context(search_key, search_id, query):
-    """Searches the web for context using the Google Custom Search API."""
     try:
         url = "https://www.googleapis.com/customsearch/v1"
         params = {
@@ -51,34 +52,41 @@ def search_for_context(search_key, search_id, query):
         print(f"An error occurred with the Search API: {e}")
         return []
 
+
+
 def main():
     gemini_key = os.getenv("GEMINI_API_KEY")
     search_key = os.getenv("SEARCH_API_KEY")
     search_id = os.getenv("SEARCH_ENGINE_ID")
 
+
     if not all([gemini_key, search_key, search_id]):
-        print("❌ Error: Missing one or more API keys in the .env file.")
+        print("Error: Missing one or more API keys in the .env file.")
         return
+
 
     if len(sys.argv) < 2:
         print("Usage: python main.py \"<your fragmented text here>\"")
         return
 
+
     fragment_text = sys.argv[1]
 
-    print("\n--- 🧠 RECONSTRUCTION REPORT ---\n")
+    print("\n--- RECONSTRUCTION REPORT ---\n")
     print(f"[Original Fragment]\n> {fragment_text}")
 
     reconstructed_text = reconstruct_text_with_gemini(gemini_key, fragment_text)
-    print(f"\n[AI-Reconstructed Text]\n> {reconstructed_text}")
+    print(f"\n\n[AI-Reconstructed Text]\n> {reconstructed_text}")
 
     context_links = search_for_context(search_key, search_id, reconstructed_text)
-    print("\n[Contextual Sources]")
+    print("\n\n[Contextual Sources]")
     if context_links:
         for link in context_links:
             print(f"* {link}")
     else:
         print("No sources found.")
+
+
 
 if __name__ == "__main__":
     main()
