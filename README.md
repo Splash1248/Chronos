@@ -97,5 +97,6 @@ The project is organized with a clear separation between the backend server, cor
     │   └── index.html      # The HTML file for the frontend user interface.
     ├── .env                # Stores your secret API keys (you must create this).
     ├── requirements.txt    # Lists the Python dependencies.
-    └── README.md           # This file.
+    ├── README.md           # This file.
+    └── test.py             # Run this to check if your gemini api key is working.
 
